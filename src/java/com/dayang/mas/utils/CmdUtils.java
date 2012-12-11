@@ -22,7 +22,7 @@ public class CmdUtils {
 		opts.addOption("app", "app-id", true, "The App ID of Mas Server");
 		opts.addOption("pwd", "password", true, "The password of APP");
 		
-		opts.addOption("mobile", "mobile-number", true, "The phone number");
+		opts.addOption("mobile", "mobile-number", true, "The phone numbers. Separate by \",\"");
 		opts.addOption("msg", "message", true, "The sms content.");
 		opts.addOption("code", "xcode", true, "The xCode of sms");
 		
