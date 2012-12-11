@@ -45,6 +45,7 @@ public class MasClient {
 		String mobile = cl.getOptionValue("mobile");
 		if(mobile == null) {
 			System.out.println("mobile is required.");
+			System.exit(400);			
 			return;
 		}
 		String[] mobiles = mobile.split(",");
@@ -61,6 +62,7 @@ public class MasClient {
 			// 获取网关连接状态(Connect:连接正常, Disconnect:断连, NotConnect:没有连接, Other:其他)
 			if(!isConnected(smsApiClient)) {
 				System.out.println("网关未连接");
+				System.exit(404);
 				return;
 			}
 			
@@ -87,6 +89,7 @@ public class MasClient {
 		} catch (Exception e) {
 			
 			System.out.println("API短信客户端调用失败:" + e.getMessage());
+			System.exit(500);
 			return;
 		}
 	}
