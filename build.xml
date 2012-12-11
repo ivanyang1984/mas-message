@@ -47,7 +47,7 @@
 		<jar destfile="${bin.dir}/jar/${ant.project.name}.${version}.jar">
 			<fileset dir="${classes.dir}">
 				<include name="**/*.class"/>
-				<exclude name="**/*.properties"/>
+				<include name="**/*.properties"/>
 			</fileset>
 			<zipgroupfileset dir="${lib.dir}" includes="*.jar" />
 			<manifest>
