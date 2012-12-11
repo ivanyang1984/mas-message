@@ -32,6 +32,7 @@ public class MasClient {
 		
 		if(cl.hasOption("h")) {
 			printHelp();
+			System.exit(1);
 			return;
 		}
 		
