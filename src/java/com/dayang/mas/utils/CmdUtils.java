@@ -44,6 +44,6 @@ public class CmdUtils {
 	
 	public static void printHelp() {
 		HelpFormatter hf = new HelpFormatter();
-		hf.printHelp("Using Hibernate Schema Tools, to create or update database schema.", opts);
+		hf.printHelp("A Java tools to sent message to mas gate server.", opts);
 	}
 }
