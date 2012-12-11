@@ -1,2 +1,2 @@
 #!/bin/bash
-java -jar bin/jar/mas-message.0.1.0.jar $*
+java -jar /home/lvjian/sts/mas-message/bin/jar/mas-message.0.1.0.jar $*

@@ -3,4 +3,5 @@
 *.swp
 *.classes
 bin/
+cs/app
 
