@@ -1,9 +1,7 @@
 package com.dayang.mas;
 
-import static com.dayang.mas.utils.CmdUtils.parseCmd;
-import static com.dayang.mas.utils.CmdUtils.printHelp;
-import static com.dayang.mas.utils.MasUtils.getSmsApiClient;
-import static com.dayang.mas.utils.MasUtils.isConnected;
+import static com.dayang.mas.utils.MasUtils.*;
+import static com.dayang.mas.utils.CmdUtils.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +78,7 @@ public class MasClient {
 		String xcode = cl.getOptionValue("code", "1111111");
 		log.info("-code:" + xcode);
 		
-		String strPriority = cl.getOptionValue("priority", "1");
+		String strPriority = cl.getOptionValue("priority", "0");
 		log.info("-priority:" + strPriority);
 		int priority = Integer.parseInt(strPriority);
 		
@@ -88,19 +86,28 @@ public class MasClient {
 			log.info("create a SmsApiClient");
 			smsApiClient = getSmsApiClient(smsHandler, ip, port,
 					appId, pwd);
+			log.info("after create sms api client, return is null? " +  (smsApiClient == null));
+			
+			log.info("Sleep Main Thread wait for connect: 4s");
+			Thread.sleep(40 * 1000);
 			
 			// 获取网关连接状态(Connect:连接正常, Disconnect:断连, NotConnect:没有连接, Other:其他)
+			log.info("check connection status ...");
 			if(!isConnected(smsApiClient)) {
 				log.error("网关未连接");
 				System.exit(404);
 				return;
 			}
+			log.info("is connected.");
 			
 			// 发送短信
 			// ======构造发送短信对象开始,下面代码演示发送短信对象几个比较主要的属性值,
 			// 其它的属性可以不设置,如果要设置可以参考sendSms方法中 SmsSendRequest参数===
+			log.info("get dest address limit...");
 			int ret = smsApiClient.getDestAddrsLimit();
+			log.info("-limit: " + ret);
 			
+			log.info("build a addresses list");
 			List<String> list = new ArrayList<String>();
 			// 每次群发数量不能超过最大限制数
 			for (int i = 0; i < ret && i < mobiles.length; i++) {
@@ -108,10 +115,11 @@ public class MasClient {
 				list.add(address);
 			}
 			
+			log.info("build a request...");
 			SmsSendRequest smsSendRequest = buildRequest(appId, message, xcode,
 					priority, list);
 			
-			
+			log.info("sent request & get response...");
 			SmsSendResponse smsSendResponse = smsApiClient
 					.sendSms(smsSendRequest);
 			log.info("提交成功,requestID:" + smsSendResponse.requestID);
