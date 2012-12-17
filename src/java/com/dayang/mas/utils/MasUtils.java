@@ -1,5 +1,7 @@
 package com.dayang.mas.utils;
 
+import org.apache.log4j.Logger;
+
 import com.jasson.mas.api.ApiException;
 import com.jasson.mas.api.common.ConnectStatus;
 import com.jasson.mas.api.sms.SmsApiClient;
@@ -8,11 +10,14 @@ import com.jasson.mas.api.sms.SmsApiClientImpl;
 
 public class MasUtils {
 	
+	static Logger log = Logger.getLogger(MasUtils.class);
+	
 	public static SmsApiClient getSmsApiClient(SmsApiClientHandler smsHandler,
 			String server_ip, int port, String app_id, String password) throws ApiException {
+		log.info("new SmsApiClientImpl using default option...");
 		SmsApiClient smsApiClient = new SmsApiClientImpl(smsHandler, server_ip, port,
 				app_id, password);
-		
+		/*
 		// 设置是否自动重连到服务器(可以不需要设置)
 		smsApiClient.setAutoConnect(true);
 		// 设置自动重连服务器相隔时间(单位:秒), 默认为30秒(可以不需要设置)
@@ -21,6 +26,8 @@ public class MasUtils {
 		smsApiClient.setConnectTimeout(100000);
 		// 设置发送超时时长,单位:millisecond(可以不需要设置)
 		smsApiClient.setSendTimeout(1000000);
+		
+		*/
 		
 		return smsApiClient;
 	}
