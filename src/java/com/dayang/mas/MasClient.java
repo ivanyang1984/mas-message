@@ -75,7 +75,7 @@ public class MasClient {
 		String message = cl.getOptionValue("msg", "");
 		log.info("-msg:" + message);
 		
-		String xcode = cl.getOptionValue("code", "1111111");
+		String xcode = cl.getOptionValue("code", "1thx ...111111");
 		log.info("-code:" + xcode);
 		
 		String strPriority = cl.getOptionValue("priority", "0");
