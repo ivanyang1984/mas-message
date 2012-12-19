@@ -88,8 +88,12 @@ public class MasClient {
 					appId, pwd);
 			log.info("after create sms api client, return is null? " +  (smsApiClient == null));
 			
-			log.info("Sleep Main Thread wait for connect: 4s");
-			Thread.sleep(40 * 1000);
+			if(smsApiClient == null) {
+				log.info("login fail!!!!");
+				System.exit(404);
+				return;
+			}
+			
 			
 			// 获取网关连接状态(Connect:连接正常, Disconnect:断连, NotConnect:没有连接, Other:其他)
 			log.info("check connection status ...");
@@ -123,6 +127,8 @@ public class MasClient {
 			SmsSendResponse smsSendResponse = smsApiClient
 					.sendSms(smsSendRequest);
 			log.info("提交成功,requestID:" + smsSendResponse.requestID);
+			
+			smsApiClient.loginOut();
 			
 		} catch (Exception e) {
 			log.error("API短信客户端调用失败:" + e.getMessage());

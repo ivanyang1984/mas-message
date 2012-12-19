@@ -2,6 +2,7 @@ package com.dayang.mas.utils;
 
 import org.apache.log4j.Logger;
 
+import com.jasson.mas.api.ApiClientFactory;
 import com.jasson.mas.api.ApiException;
 import com.jasson.mas.api.common.ConnectStatus;
 import com.jasson.mas.api.sms.SmsApiClient;
@@ -14,9 +15,20 @@ public class MasUtils {
 	
 	public static SmsApiClient getSmsApiClient(SmsApiClientHandler smsHandler,
 			String server_ip, int port, String app_id, String password) throws ApiException {
-		log.info("new SmsApiClientImpl using default option...");
-		SmsApiClient smsApiClient = new SmsApiClientImpl(smsHandler, server_ip, port,
+		log.info("create SmsApiClientImpl using ApiClientFactory...");
+		SmsApiClient smsApiClient = ApiClientFactory.createSmsApiClient(smsHandler, server_ip, port,
 				app_id, password);
+		
+		if(smsApiClient == null) {
+			log.info("fail to login ....");
+			return null;
+		}
+		
+		log.info("login success");
+		smsApiClient.start();
+		smsApiClient.setAutoConnect(true);
+		
+		
 		/*
 		// 设置是否自动重连到服务器(可以不需要设置)
 		smsApiClient.setAutoConnect(true);
