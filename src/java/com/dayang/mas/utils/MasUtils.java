@@ -7,7 +7,6 @@ import com.jasson.mas.api.ApiException;
 import com.jasson.mas.api.common.ConnectStatus;
 import com.jasson.mas.api.sms.SmsApiClient;
 import com.jasson.mas.api.sms.SmsApiClientHandler;
-import com.jasson.mas.api.sms.SmsApiClientImpl;
 
 public class MasUtils {
 	
