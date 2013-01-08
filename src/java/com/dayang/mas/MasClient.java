@@ -130,6 +130,7 @@ public class MasClient {
 			
 			smsApiClient.loginOut();
 			
+			System.exit(200);
 		} catch (Exception e) {
 			log.error("API短信客户端调用失败:" + e.getMessage());
 			log.error(e);
